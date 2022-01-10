@@ -1,0 +1,1264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyzing Web Archives &#8212; Web Archives Workshop</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Markdown Files" href="Our_dataset.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Web Archives Workshop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to the Analyzing Web Archives Workshop
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="What_are_web_archives.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Our_dataset.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analyzing Web Archives
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Meme_Web_Archive_Exploration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cmurgu/jbooks"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cmurgu/jbooks/issues/new?title=Issue%20on%20page%20%2FMeme_Web_Archive_Exploration.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cmurgu/jbooks/master?urlpath=lab/tree/Meme_Web_Archive_Exploration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/cmurgu/jbooks/blob/master/Meme_Web_Archive_Exploration.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analyzing Web Archives
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-this-notebook-works">
+     How this notebook works
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-our-data-set">
+   Loading our data set
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-general-data-exploration">
+   Some General Data Exploration
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-much-data">
+     How much data?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-entry">
+     Random Entry
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#category-of-memes">
+   Category of memes?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analyzing Web Archives</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analyzing Web Archives
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-this-notebook-works">
+     How this notebook works
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-our-data-set">
+   Loading our data set
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-general-data-exploration">
+   Some General Data Exploration
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-much-data">
+     How much data?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-entry">
+     Random Entry
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#category-of-memes">
+   Category of memes?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><img alt="dsl_logo.png" src="https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/dsl_logo.png" /></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="analyzing-web-archives">
+<h1>Analyzing Web Archives<a class="headerlink" href="#analyzing-web-archives" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Digital Scholarship Lab Level Analyzing Web Archives workshop. The following notebook provides an investigation into the <a class="reference external" href="https://www.loc.gov/item/2018655320/">Meme Generator dataset</a></p>
+<div class="section" id="how-this-notebook-works">
+<h2>How this notebook works<a class="headerlink" href="#how-this-notebook-works" title="Permalink to this headline">¶</a></h2>
+<p>This webpage is a Google Colab notebook and is comprised of different <em>cells</em>. Some are code cells that run Python snippets. To works through these cells simply click on the triangle <em>run</em> button in each cell. Click in the cell below to see the play button, then click on it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#from IPython.core.display import display,HTML</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries loaded, and ready to run!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries loaded, and ready to run!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="loading-our-data-set">
+<h1>Loading our data set<a class="headerlink" href="#loading-our-data-set" title="Permalink to this headline">¶</a></h1>
+<p>The information from this archive is saved in a <em>CSV</em> file. Or put in otherwords, something like a spreadsheet. In the next cell we will load this file into something call a dataframe and we’ll look at the first 5 entries by looking at the <strong>head</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10509464</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Spiderman Approves</td>
+      <td>http://memegenerator.net/instance/10509464</td>
+      <td>91eee1453f2b66b4b0d662476bf630d8</td>
+      <td>87868</td>
+      <td>seems legit</td>
+      <td>Spiderman Approves</td>
+      <td>seems</td>
+      <td>legit</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12285257</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Alright Then Business Kid</td>
+      <td>http://memegenerator.net/instance/12285257</td>
+      <td>96a3aa60c0f3a5ffb027e8977f23b2cc</td>
+      <td>110242</td>
+      <td>Fret not I stayed at a Holiday Inn Express las...</td>
+      <td>Alright Then Business Kid</td>
+      <td>Fret not</td>
+      <td>I stayed at a Holiday Inn Express last night</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20612245</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Archer</td>
+      <td>http://memegenerator.net/instance/20612245</td>
+      <td>1b84704851704a2dc366768a2210d659</td>
+      <td>125963</td>
+      <td>hello airplanes? yeah, this is blimps. Yeah, y...</td>
+      <td>Archer</td>
+      <td>hello airplanes? yeah, this is blimps.</td>
+      <td>Yeah, you win.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20614628</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Futurama Fry</td>
+      <td>http://memegenerator.net/instance/20614628</td>
+      <td>448f5d4a15f5c90ce4d64c75013c8e9a</td>
+      <td>161623</td>
+      <td>LEGS IN COVER. TOO HOT. LEGS OUT OF COVER. TOO...</td>
+      <td>Futurama Fry</td>
+      <td>LEGS IN COVER. TOO HOT. LEGS OUT OF COVER. TOO...</td>
+      <td>BUt Scared monster under the bed will eat me</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24194267</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>One Does Not Simply</td>
+      <td>http://memegenerator.net/instance/24194267</td>
+      <td>37feb180a0e7660e360ed94380b39f60</td>
+      <td>92866</td>
+      <td>one does not simply  put toothpaste back in th...</td>
+      <td>One Does Not Simply</td>
+      <td>one does not simply</td>
+      <td>put toothpaste back in the tube</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="some-general-data-exploration">
+<h1>Some General Data Exploration<a class="headerlink" href="#some-general-data-exploration" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="how-much-data">
+<h2>How much data?<a class="headerlink" href="#how-much-data" title="Permalink to this headline">¶</a></h2>
+<p>We can count the <strong>length</strong> of our data frame to see how many entries we have</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We have this many memes to look at: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">meme_data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We have this many memes to look at:  57687
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="random-entry">
+<h2>Random Entry<a class="headerlink" href="#random-entry" title="Permalink to this headline">¶</a></h2>
+<p>To get a better sense of what is in our dataset let’s look at a random entry by using <strong>sample</strong> with a value of 1. Click the below button a few times to get a few different options.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Memegenerator: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Meme Page URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Archive: </span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">rando</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/10715567.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/10715567
+View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/10715567.jpg
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7134</th>
+      <td>10715567</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Chill Out Lemur</td>
+      <td>http://memegenerator.net/instance/10715567</td>
+      <td>13eccc0530698ce46ce8d8d5d4758cd1</td>
+      <td>48301</td>
+      <td>calmao perro fumemonos la cola y nos vamos a c...</td>
+      <td>Chill Out Lemur</td>
+      <td>calmao perro</td>
+      <td>fumemonos la cola y nos vamos a clases</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Q1</strong> Have a look at the data that is associated with a random record. In the chat box suggest some things you might want to explore with this data? Share your reponse in the chat box.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="category-of-memes">
+<h1>Category of memes?<a class="headerlink" href="#category-of-memes" title="Permalink to this headline">¶</a></h1>
+<p>As you might know, memes come in many different flavours. Let’s see if we can find out how many types there are? We’ll do this by <strong>grouping</strong> our <em>Base Meme Name</em> column and <strong>counting</strong> how many entries are in each.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+    <tr>
+      <th>Base Meme Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>-</th>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>10guy</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12 oz mouse</th>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>1889 [10] guy</th>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>ТИПИЧНАЯ DIVA</th>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>ТИПИЧНЫЙ JONGHYUN</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ТИПИЧНЫЙ ONEW</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ТИПИЧНЫЙ TAEMIN</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Типичная Эля Чавес/Typical Elya Chavez</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>1651 rows × 9 columns</p>
+</div></div></div>
+</div>
+<p><strong>Q2</strong> Based on the above summary how many different type so memes we have? Share your response in the chat box.</p>
+<p>Yikes! That looks like a lot. Let’s just keep the top <strong>25</strong> entries. We’ll do this by <strong>sorting</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+    <tr>
+      <th>Base Meme Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Y U No</th>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+      <td>766</td>
+    </tr>
+    <tr>
+      <th>Futurama Fry</th>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+      <td>663</td>
+    </tr>
+    <tr>
+      <th>Insanity Wolf</th>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+      <td>612</td>
+    </tr>
+    <tr>
+      <th>Philosoraptor</th>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+      <td>531</td>
+    </tr>
+    <tr>
+      <th>The Most Interesting Man In The World</th>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+      <td>511</td>
+    </tr>
+    <tr>
+      <th>Success Kid</th>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+      <td>510</td>
+    </tr>
+    <tr>
+      <th>Foul Bachelor Frog</th>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>469</td>
+      <td>468</td>
+    </tr>
+    <tr>
+      <th>Socially Awkward Penguin</th>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+      <td>446</td>
+    </tr>
+    <tr>
+      <th>Advice Yoda Gives</th>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>Joseph Ducreux</th>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+      <td>415</td>
+    </tr>
+    <tr>
+      <th>Forever Alone</th>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+      <td>414</td>
+    </tr>
+    <tr>
+      <th>Slowpoke</th>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+      <td>400</td>
+    </tr>
+    <tr>
+      <th>Good Guy Greg</th>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+      <td>387</td>
+    </tr>
+    <tr>
+      <th>we got a badass over here</th>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>381</td>
+      <td>380</td>
+    </tr>
+    <tr>
+      <th>Courage Wolf</th>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+      <td>375</td>
+    </tr>
+    <tr>
+      <th>Butthurt Dweller</th>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>Yo Dawg</th>
+      <td>363</td>
+      <td>363</td>
+      <td>363</td>
+      <td>363</td>
+      <td>363</td>
+      <td>363</td>
+      <td>363</td>
+      <td>362</td>
+      <td>362</td>
+    </tr>
+    <tr>
+      <th>Willy Wonka</th>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+      <td>356</td>
+    </tr>
+    <tr>
+      <th>success baby</th>
+      <td>345</td>
+      <td>345</td>
+      <td>345</td>
+      <td>345</td>
+      <td>345</td>
+      <td>345</td>
+      <td>345</td>
+      <td>344</td>
+      <td>342</td>
+    </tr>
+    <tr>
+      <th>Chuck Norris</th>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+      <td>344</td>
+    </tr>
+    <tr>
+      <th>Conspiracy Keanu</th>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+      <td>340</td>
+    </tr>
+    <tr>
+      <th>Annoying Gamer Kid</th>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+      <td>332</td>
+    </tr>
+    <tr>
+      <th>Trollface</th>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>Me Gusta</th>
+      <td>299</td>
+      <td>299</td>
+      <td>299</td>
+      <td>299</td>
+      <td>299</td>
+      <td>297</td>
+      <td>299</td>
+      <td>298</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>All the things</th>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>297</td>
+      <td>296</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Random Meme by Category</span>
+<span class="c1">#@markdown Type copy and pasting one of the **Base Meme Name** to see a random entry from that category of meme</span>
+<span class="n">meme_option</span> <span class="o">=</span> <span class="s2">&quot;10guy&quot;</span> <span class="c1">#@param {type:&quot;string&quot;}</span>
+
+<span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">meme_option</span><span class="p">)]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Memegenerator: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Meme Page URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Archive: </span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">rando</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/34090689.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/34090689
+View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/34090689.jpg
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>56130</th>
+      <td>34090689</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>10guy</td>
+      <td>http://memegenerator.net/instance/34090689</td>
+      <td>c4677fed2de3af3bc5a2665b61a46f09</td>
+      <td>56513</td>
+      <td>Cant sort ascendingly no matter what compare f...</td>
+      <td>10guy</td>
+      <td>Cant sort ascendingly no matter what compare f...</td>
+      <td>sort( a, a + n );    printf( %d, a[0], cmp );</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What’s the <strong>average</strong> number of memes in each type?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_type_average</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">])[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average number of entries per meme category: &quot;</span><span class="p">,</span><span class="n">meme_type_average</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average number of entries per meme category:  34.940642035130224
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s draw a <strong>histogram</strong> of this distribution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">],</span><span class="n">bins</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Category Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Entries&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Categories&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Meme_Web_Archive_Exploration_21_0.png" src="_images/Meme_Web_Archive_Exploration_21_0.png" />
+</div>
+</div>
+<p><strong>Q3</strong> Can you describe this graph? What is the biggest value that it is showing?</p>
+<p>data things to do</p>
+<ul class="simple">
+<li><p>alt text somehow?</p></li>
+<li><p>language detection?</p></li>
+<li><p>pull in scores via API?</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cmurgu/jbooks",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Our_dataset.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Markdown Files</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Tim Ribaric and Cal Murgu<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
