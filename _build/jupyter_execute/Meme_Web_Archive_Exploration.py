@@ -15,11 +15,16 @@
 # In[1]:
 
 
+get_ipython().system('pip install langdetect')
+
 import pandas as pd
 import matplotlib.pyplot as plt
 #from IPython.core.display import display,HTML
 from IPython.display import Image,display
+from langdetect import detect
+import matplotlib.pyplot as plt
 
+get_ipython().run_line_magic('matplotlib', 'inline')
 print("Libraries loaded, and ready to run!")
 
 
@@ -45,7 +50,8 @@ meme_data.head(5)
 
 # ### How much data?
 # 
-# We can count the **length** of our data frame to see how many entries we have
+# We can count the **length** of our data frame to see how many entries we have using thing len() function.
+# 
 
 # In[3]:
 
@@ -99,7 +105,7 @@ meme_data.groupby(["Base Meme Name"]).count().sort_values(by="Meme ID",ascending
 
 #@title Random Meme by Category
 #@markdown Type copy and pasting one of the **Base Meme Name** to see a random entry from that category of meme
-meme_option = "10guy" #@param {type:"string"}
+meme_option = "Slowpoke" #@param {type:"string"}
 
 rando = meme_data[meme_data["Base Meme Name"] == str(meme_option)].sample(1)
 display(Image(url=rando['Archived URL'].values[0], format='jpg'))
@@ -142,3 +148,59 @@ plt.show()
 # - alt text somehow?
 # - language detection?
 # - pull in scores via API?
+
+# ## Language info
+# 
+# As we've seen in our examples there are many different languages represented in our dataset. Let's see if we can **enrich** our dataset by automatically detecting what language it is and adding that as a new column. We'll us the [langdetect](https://pypi.org/project/langdetect/) library to do this. 
+
+# In[10]:
+
+
+#Let's look at our random item again
+rando
+
+
+# In[11]:
+
+
+# Let's the language of the random entry from earlier
+# We'll get a two letter languge code that represents one of the languages in the list of ISO 639-1 codes (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). 
+detect(str(rando["Alternate Text"]))
+
+
+# It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values.
+# 
+# 
+# (It took 8 minutes for the code to run)
+
+# In[12]:
+
+
+#open CSV to dataframe
+lang_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv")
+#append to meme_data dataframe
+meme_data = meme_data.join(lang_data)
+meme_data.sample(5)
+
+
+# In[13]:
+
+
+language_count = dict()
+
+# Go through each row of the data and see what two letter language code
+# is in the iso_language_code metadata field
+
+for row in meme_data.itertuples(index=False):
+  language_entry = row[-1]
+  #Create a lookup 'dictionary' of codes
+  if language_entry in language_count:
+    language_count[language_entry] += 1
+  else:
+    language_count[language_entry] = 1
+    
+
+plt.pie(list(language_count.values()),labels=list(language_count.keys()))
+plt.title("Languages in the Memes")
+plt.show()
+

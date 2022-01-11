@@ -261,6 +261,13 @@
   <a class="reference internal nav-link" href="#category-of-memes">
    Category of memes?
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#language-info">
+     Language info
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -320,6 +327,13 @@
   <a class="reference internal nav-link" href="#category-of-memes">
    Category of memes?
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#language-info">
+     Language info
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -339,16 +353,167 @@
 <p>This webpage is a Google Colab notebook and is comprised of different <em>cells</em>. Some are code cells that run Python snippets. To works through these cells simply click on the triangle <em>run</em> button in each cell. Click in the cell below to see the play button, then click on it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install langdetect
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="c1">#from IPython.core.display import display,HTML</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span>
+<span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries loaded, and ready to run!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting langdetect
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading langdetect-1.0.9.tar.gz (981 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25l
+     |▍                               | 10 kB 7.0 MB/s eta 0:00:01
+     |▊                               | 20 kB 867 kB/s eta 0:00:02
+     |█                               | 30 kB 890 kB/s eta 0:00:02
+     |█▍                              | 40 kB 1.1 MB/s eta 0:00:01
+     |█▊                              | 51 kB 1.1 MB/s eta 0:00:01
+     |██                              | 61 kB 1.2 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |██▍                             | 71 kB 1.1 MB/s eta 0:00:01
+     |██▊                             | 81 kB 1.2 MB/s eta 0:00:01
+     |███                             | 92 kB 1.3 MB/s eta 0:00:01
+     |███▍                            | 102 kB 1.3 MB/s eta 0:00:01
+     |███▊                            | 112 kB 1.3 MB/s eta 0:00:01
+     |████                            | 122 kB 1.3 MB/s eta 0:00:01
+     |████▍                           | 133 kB 1.3 MB/s eta 0:00:01
+     |████▊                           | 143 kB 1.3 MB/s eta 0:00:01
+     |█████                           | 153 kB 1.3 MB/s eta 0:00:01
+     |█████▍                          | 163 kB 1.3 MB/s eta 0:00:01
+     |█████▊                          | 174 kB 1.3 MB/s eta 0:00:01
+     |██████                          | 184 kB 1.3 MB/s eta 0:00:01
+     |██████▍                         | 194 kB 1.3 MB/s eta 0:00:01
+     |██████▊                         | 204 kB 1.3 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |███████                         | 215 kB 1.3 MB/s eta 0:00:01
+     |███████▍                        | 225 kB 1.3 MB/s eta 0:00:01
+     |███████▊                        | 235 kB 1.3 MB/s eta 0:00:01
+     |████████                        | 245 kB 1.3 MB/s eta 0:00:01
+     |████████▍                       | 256 kB 1.3 MB/s eta 0:00:01
+     |████████▊                       | 266 kB 1.3 MB/s eta 0:00:01
+     |█████████                       | 276 kB 1.3 MB/s eta 0:00:01
+     |█████████▍                      | 286 kB 1.3 MB/s eta 0:00:01
+     |█████████▊                      | 296 kB 1.3 MB/s eta 0:00:01
+     |██████████                      | 307 kB 1.3 MB/s eta 0:00:01
+     |██████████▍                     | 317 kB 1.3 MB/s eta 0:00:01
+     |██████████▊                     | 327 kB 1.3 MB/s eta 0:00:01
+     |███████████                     | 337 kB 1.3 MB/s eta 0:00:01
+     |███████████▍                    | 348 kB 1.3 MB/s eta 0:00:01
+     |███████████▊                    | 358 kB 1.3 MB/s eta 0:00:01
+     |████████████                    | 368 kB 1.3 MB/s eta 0:00:01
+     |████████████▍                   | 378 kB 1.3 MB/s eta 0:00:01
+     |████████████▊                   | 389 kB 1.3 MB/s eta 0:00:01
+     |█████████████                   | 399 kB 1.3 MB/s eta 0:00:01
+     |█████████████▍                  | 409 kB 1.3 MB/s eta 0:00:01
+     |█████████████▊                  | 419 kB 1.3 MB/s eta 0:00:01
+     |██████████████                  | 430 kB 1.3 MB/s eta 0:00:01
+     |██████████████▍                 | 440 kB 1.3 MB/s eta 0:00:01
+     |██████████████▊                 | 450 kB 1.3 MB/s eta 0:00:01
+     |███████████████                 | 460 kB 1.3 MB/s eta 0:00:01
+     |███████████████▍                | 471 kB 1.3 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |███████████████▊                | 481 kB 1.3 MB/s eta 0:00:01
+     |████████████████                | 491 kB 1.3 MB/s eta 0:00:01
+     |████████████████▍               | 501 kB 1.3 MB/s eta 0:00:01
+     |████████████████▊               | 512 kB 1.3 MB/s eta 0:00:01
+     |█████████████████               | 522 kB 1.3 MB/s eta 0:00:01
+     |█████████████████▍              | 532 kB 1.3 MB/s eta 0:00:01
+     |█████████████████▊              | 542 kB 1.3 MB/s eta 0:00:01
+     |██████████████████              | 552 kB 1.3 MB/s eta 0:00:01
+     |██████████████████▍             | 563 kB 1.3 MB/s eta 0:00:01
+     |██████████████████▊             | 573 kB 1.3 MB/s eta 0:00:01
+     |███████████████████             | 583 kB 1.3 MB/s eta 0:00:01
+     |███████████████████▍            | 593 kB 1.3 MB/s eta 0:00:01
+     |███████████████████▊            | 604 kB 1.3 MB/s eta 0:00:01
+     |████████████████████            | 614 kB 1.3 MB/s eta 0:00:01
+     |████████████████████▍           | 624 kB 1.3 MB/s eta 0:00:01
+     |████████████████████▊           | 634 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████           | 645 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████▍          | 655 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████▊          | 665 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████          | 675 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████▍         | 686 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████▊         | 696 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████         | 706 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████▍        | 716 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████▊        | 727 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████        | 737 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████▍       | 747 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████▊       | 757 kB 1.3 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |█████████████████████████       | 768 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████████▍      | 778 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████████▊      | 788 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████      | 798 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████▍     | 808 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████▊     | 819 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████     | 829 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████▍    | 839 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████▊    | 849 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████████    | 860 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████████▍   | 870 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████████▊   | 880 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████████████   | 890 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████████████▍  | 901 kB 1.3 MB/s eta 0:00:01
+     |█████████████████████████████▊  | 911 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████████  | 921 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████████▍ | 931 kB 1.3 MB/s eta 0:00:01
+     |██████████████████████████████▊ | 942 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████████ | 952 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████████▍| 962 kB 1.3 MB/s eta 0:00:01
+     |███████████████████████████████▊| 972 kB 1.3 MB/s eta 0:00:01
+     |████████████████████████████████| 981 kB 1.3 MB/s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: six in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from langdetect) (1.16.0)
+Building wheels for collected packages: langdetect
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for langdetect (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25h  Created wheel for langdetect: filename=langdetect-1.0.9-py3-none-any.whl size=993242 sha256=c9fc5c7dd1abdee94ff2c5b1a9253634c6473a4f86f916a8f400af7bfc985f49
+  Stored in directory: /Users/calmurgu/Library/Caches/pip/wheels/d1/c1/d9/7e068de779d863bc8f8fc9467d85e25cfe47fa5051fff1a1bb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully built langdetect
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: langdetect
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed langdetect-1.0.9
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries loaded, and ready to run!
 </pre></div>
 </div>
@@ -473,7 +638,7 @@
 <hr class="docutils" />
 <div class="section" id="how-much-data">
 <h2>How much data?<a class="headerlink" href="#how-much-data" title="Permalink to this headline">¶</a></h2>
-<p>We can count the <strong>length</strong> of our data frame to see how many entries we have</p>
+<p>We can count the <strong>length</strong> of our data frame to see how many entries we have using thing len() function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We have this many memes to look at: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">meme_data</span><span class="p">))</span>
@@ -501,8 +666,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/11945037.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/11945037
-View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/11945037.jpg
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/17995050.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/17995050
+View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/17995050.jpg
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -537,17 +702,17 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
   </thead>
   <tbody>
     <tr>
-      <th>13537</th>
-      <td>11945037</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>ForeverAloneRussian</td>
-      <td>http://memegenerator.net/instance/11945037</td>
-      <td>b09c9af6b1538d0648c48a1bdca8d538</td>
-      <td>30054</td>
-      <td>any te amo</td>
-      <td>ForeverAloneRussian</td>
-      <td>any</td>
-      <td>te amo</td>
+      <th>26566</th>
+      <td>17995050</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Socially Terrifying Penguin</td>
+      <td>http://memegenerator.net/instance/17995050</td>
+      <td>9c92de4807263d329613e39a1aa8fdd9</td>
+      <td>39658</td>
+      <td>у матери истерика со слезами токо троллишь, чт...</td>
+      <td>Socially Terrifying Penguin</td>
+      <td>у матери истерика со слезами</td>
+      <td>токо троллишь, чтобы громче орала</td>
     </tr>
   </tbody>
 </table>
@@ -1104,7 +1269,7 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Random Meme by Category</span>
 <span class="c1">#@markdown Type copy and pasting one of the **Base Meme Name** to see a random entry from that category of meme</span>
-<span class="n">meme_option</span> <span class="o">=</span> <span class="s2">&quot;10guy&quot;</span> <span class="c1">#@param {type:&quot;string&quot;}</span>
+<span class="n">meme_option</span> <span class="o">=</span> <span class="s2">&quot;Slowpoke&quot;</span> <span class="c1">#@param {type:&quot;string&quot;}</span>
 
 <span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">meme_option</span><span class="p">)]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
@@ -1115,8 +1280,8 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/34090689.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/34090689
-View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/34090689.jpg
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/20150800.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/20150800
+View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/20150800.jpg
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1151,17 +1316,17 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
   </thead>
   <tbody>
     <tr>
-      <th>56130</th>
-      <td>34090689</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>10guy</td>
-      <td>http://memegenerator.net/instance/34090689</td>
-      <td>c4677fed2de3af3bc5a2665b61a46f09</td>
-      <td>56513</td>
-      <td>Cant sort ascendingly no matter what compare f...</td>
-      <td>10guy</td>
-      <td>Cant sort ascendingly no matter what compare f...</td>
-      <td>sort( a, a + n );    printf( %d, a[0], cmp );</td>
+      <th>29959</th>
+      <td>20150800</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Slowpoke</td>
+      <td>http://memegenerator.net/instance/20150800</td>
+      <td>9304eefb836ebba728487b5804badd3b</td>
+      <td>50907</td>
+      <td>мама говорит это всё план тормозит</td>
+      <td>Slowpoke</td>
+      <td>мама говорит</td>
+      <td>это всё план тормозит</td>
     </tr>
   </tbody>
 </table>
@@ -1206,6 +1371,225 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
 <li><p>language detection?</p></li>
 <li><p>pull in scores via API?</p></li>
 </ul>
+<div class="section" id="language-info">
+<h2>Language info<a class="headerlink" href="#language-info" title="Permalink to this headline">¶</a></h2>
+<p>As we’ve seen in our examples there are many different languages represented in our dataset. Let’s see if we can <strong>enrich</strong> our dataset by automatically detecting what language it is and adding that as a new column. We’ll us the <a class="reference external" href="https://pypi.org/project/langdetect/">langdetect</a> library to do this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s look at our random item again</span>
+<span class="n">rando</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>29959</th>
+      <td>20150800</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Slowpoke</td>
+      <td>http://memegenerator.net/instance/20150800</td>
+      <td>9304eefb836ebba728487b5804badd3b</td>
+      <td>50907</td>
+      <td>мама говорит это всё план тормозит</td>
+      <td>Slowpoke</td>
+      <td>мама говорит</td>
+      <td>это всё план тормозит</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s the language of the random entry from earlier</span>
+<span class="c1"># We&#39;ll get a two letter languge code that represents one of the languages in the list of ISO 639-1 codes (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). </span>
+<span class="n">detect</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rando</span><span class="p">[</span><span class="s2">&quot;Alternate Text&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ru&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values.</p>
+<p>(It took 8 minutes for the code to run)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#open CSV to dataframe</span>
+<span class="n">lang_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv&quot;</span><span class="p">)</span>
+<span class="c1">#append to meme_data dataframe</span>
+<span class="n">meme_data</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lang_data</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+      <th>Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4742</th>
+      <td>10484586</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Musically Oblivious 8th Grader</td>
+      <td>http://memegenerator.net/instance/10484586</td>
+      <td>9d849825ad8cdc0be7d1a9630b570589</td>
+      <td>46180</td>
+      <td>я люблю классический рок например, fall out boy</td>
+      <td>Musically Oblivious 8th Grader</td>
+      <td>я люблю классический рок</td>
+      <td>например, fall out boy</td>
+      <td>ru</td>
+    </tr>
+    <tr>
+      <th>9991</th>
+      <td>11122907</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Bear Grylls</td>
+      <td>http://memegenerator.net/instance/11122907</td>
+      <td>612f506c9bd67ecc8ede16867bfd8b39</td>
+      <td>78238</td>
+      <td>I should cut off my fingers and eat them I can...</td>
+      <td>Bear Grylls</td>
+      <td>I should cut off my fingers and eat them</td>
+      <td>I can just replace them with these sausages th...</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <th>57035</th>
+      <td>34640844</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Advice Edit Button</td>
+      <td>http://memegenerator.net/instance/34640844</td>
+      <td>fe90beb8e806ccfc2d95782cad72367e</td>
+      <td>24526</td>
+      <td>I for one welcome overused meme thing</td>
+      <td>Advice Edit Button</td>
+      <td>I for one welcome</td>
+      <td>overused meme-thing</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <th>35417</th>
+      <td>22826540</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Feminist Cunt</td>
+      <td>http://memegenerator.net/instance/22826540</td>
+      <td>91b0bdb7ac1fd4747fa26d03caa753fa</td>
+      <td>46525</td>
+      <td>A real gentleman holds the door open for a gir...</td>
+      <td>Feminist Cunt</td>
+      <td>A real gentleman holds the door open for a girl</td>
+      <td>the only reason a guy holds the door open for ...</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <th>35936</th>
+      <td>23017599</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Extremely Drunk Metalhead</td>
+      <td>http://memegenerator.net/instance/23017599</td>
+      <td>79ecfcc27c27c29de26d6f3f2c6012e1</td>
+      <td>64977</td>
+      <td>wanted to play ME3 on release date ordered fro...</td>
+      <td>Extremely Drunk Metalhead</td>
+      <td>wanted to play ME3 on release date</td>
+      <td>ordered from zavvi</td>
+      <td>en</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">language_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="c1"># Go through each row of the data and see what two letter language code</span>
+<span class="c1"># is in the iso_language_code metadata field</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="n">language_entry</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="c1">#Create a lookup &#39;dictionary&#39; of codes</span>
+  <span class="k">if</span> <span class="n">language_entry</span> <span class="ow">in</span> <span class="n">language_count</span><span class="p">:</span>
+    <span class="n">language_count</span><span class="p">[</span><span class="n">language_entry</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">language_count</span><span class="p">[</span><span class="n">language_entry</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">language_count</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span><span class="n">labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">language_count</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Languages in the Memes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Meme_Web_Archive_Exploration_30_0.png" src="_images/Meme_Web_Archive_Exploration_30_0.png" />
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
