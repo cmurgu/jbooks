@@ -11,6 +11,9 @@
 # ## How this notebook works
 # 
 # This webpage is a Google Colab notebook and is comprised of different *cells*. Some are code cells that run Python snippets. To works through these cells simply click on the triangle _run_ button in each cell. Click in the cell below to see the play button, then click on it.
+# 
+# ![How to](how-to.gif)
+# 
 
 # In[1]:
 
