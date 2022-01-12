@@ -13,22 +13,24 @@
 # This webpage is a Google Colab notebook and is comprised of different *cells*. Some are code cells that run Python snippets. To works through these cells simply click on the triangle _run_ button in each cell. Click in the cell below to see the play button, then click on it.
 # 
 # ![How to](how-to.gif)
-# 
 
 # In[1]:
 
 
 get_ipython().system('pip install langdetect')
+get_ipython().system('pip install pandas')
 
 import pandas as pd
 import matplotlib.pyplot as plt
-#from IPython.core.display import display,HTML
-from IPython.display import Image,display
+from IPython.display import Image,display,IFrame
+from ipywidgets import widgets,interact,interact_manual
 from langdetect import detect
 import matplotlib.pyplot as plt
 
+global rando
+
 get_ipython().run_line_magic('matplotlib', 'inline')
-print("Libraries loaded, and ready to run!")
+print("\nLibraries loaded, and ready to run!")
 
 
 # # Loading our data set
@@ -39,6 +41,8 @@ print("Libraries loaded, and ready to run!")
 
 
 meme_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv", sep=",")
+meme_data["Meme ID"] = meme_data["Meme ID"].astype(str)
+
 meme_data.head(5)
 
 
@@ -54,6 +58,8 @@ meme_data.head(5)
 # ### How much data?
 # 
 # We can count the **length** of our data frame to see how many entries we have using thing len() function.
+# 
+
 # 
 
 # In[3]:
@@ -100,22 +106,33 @@ meme_data.groupby(["Base Meme Name"]).count()
 # In[6]:
 
 
+
 meme_data.groupby(["Base Meme Name"]).count().sort_values(by="Meme ID",ascending=False)[0:25]
 
 
 # In[7]:
 
 
-#@title Random Meme by Category
-#@markdown Type copy and pasting one of the **Base Meme Name** to see a random entry from that category of meme
-meme_option = "Slowpoke" #@param {type:"string"}
+#Random Entry Form
+def show_random(choice):
+  rando = meme_data[meme_data["Base Meme Name"] == str(choice)].sample(1)
+  print("View on Memegenerator: \t",rando['Meme Page URL'].values[0])
+  print("View on Archive: \t\t\t",rando['Archived URL'].values[0])
+  display(Image(url=rando['Archived URL'].values[0], format='jpg'))
+  display(rando)
 
-rando = meme_data[meme_data["Base Meme Name"] == str(meme_option)].sample(1)
-display(Image(url=rando['Archived URL'].values[0], format='jpg'))
-print("View on Memegenerator: \t",rando['Meme Page URL'].values[0])
-print("View on Archive: \t\t\t",rando['Archived URL'].values[0])
-rando
 
+title_textbox = widgets.Text(
+    value='Me Gusta',
+    description='Category',
+)
+print("Enter a meme category from the list above to see a random entry in that category")
+print("Click 'Show' to display\n")
+show_random_control = interact_manual.options(manual_name="Show")
+show_random_control(show_random,choice=title_textbox);
+
+
+# Let's know look at how the meme is displayed as a table
 
 # What's the **average** number of memes in each type?
 # 
@@ -128,9 +145,20 @@ meme_type_average = meme_data.groupby(["Base Meme Name"])["Meme ID"].count().mea
 print("Average number of entries per meme category: ",meme_type_average)
 
 
-# Let's draw a **histogram** of this distribution
+# The average might be a little misleading. Let's also check what the median number is for each base meme. The code chunk below is incomplete. Can you resolve the error?
 
 # In[9]:
+
+
+meme_type_median = meme_data.groupby(["Base Meme Name"])["Meme ID"].count().median()
+print("The median number of entires per base meme is: ",meme_type_median)
+
+
+# As you can see, the difference between the mean and the median is significant. This is because there's a skewed distribution in our dataset. Do you have any guesses as to why this might be the case? Share your thoughts in the chat!
+# 
+# Let's visualize this skewed distribution by drawing a **histogram**.
+
+# In[10]:
 
 
 bins = 150
@@ -145,48 +173,50 @@ plt.show()
 
 # **Q3** Can you describe this graph? What is the biggest value that it is showing?
 
-# 
-
-# data things to do
-# - alt text somehow?
-# - language detection?
-# - pull in scores via API?
-
 # ## Language info
 # 
-# As we've seen in our examples there are many different languages represented in our dataset. Let's see if we can **enrich** our dataset by automatically detecting what language it is and adding that as a new column. We'll us the [langdetect](https://pypi.org/project/langdetect/) library to do this. 
+# As we've seen in our examples there are many different languages represented in our dataset. Let's see if we can **enrich** our dataset by automatically detecting what language it is and adding that as a new column. We'll use the [langdetect](https://pypi.org/project/langdetect/) library to do this. We can use the text in the _Alternate Text_ column.
 
-# In[10]:
+# In[11]:
 
 
 #Let's look at our random item again
 rando
 
 
-# In[11]:
+# In[12]:
 
 
 # Let's the language of the random entry from earlier
 # We'll get a two letter languge code that represents one of the languages in the list of ISO 639-1 codes (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). 
-detect(str(rando["Alternate Text"]))
+print(detect(str(rando["Alternate Text"])))
 
 
-# It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values.
+# It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values. (It took 8 minutes for language detection code to run on the original dataset)
 # 
-# 
-# (It took 8 minutes for the code to run)
+# Have a look at the new column _Language_ that was added.
 
-# In[12]:
+# In[13]:
 
 
-#open CSV to dataframe
+#reload original dataset
+meme_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv", sep=",")
+meme_data["Meme ID"] = meme_data["Meme ID"].astype(str)
+
+#open CSV of language info and create a dataframe
 lang_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv")
-#append to meme_data dataframe
+
+#language data from to meme_data dataframe
 meme_data = meme_data.join(lang_data)
 meme_data.sample(5)
 
 
-# In[13]:
+# 
+# ## Summary of Language Information?
+# 
+# Run the next cell to generate a pie graph of the language count in the meme.
+
+# In[14]:
 
 
 language_count = dict()
@@ -207,3 +237,99 @@ plt.pie(list(language_count.values()),labels=list(language_count.keys()))
 plt.title("Languages in the Memes")
 plt.show()
 
+
+# That's a lot of languages!
+
+# ## Meme Scores!
+# 
+# Memegenerator has voting capability. By clicking the up or down arrow users can increase / descrease this score. Let's see this for our random meme. Run the next cell to generate the preview
+
+# In[15]:
+
+
+preview_url = str(rando['Meme Page URL'].values[0])
+preview_url = preview_url.replace("http:","https:")
+
+IFrame(preview_url,width=1000, height=700)
+
+
+# To enrich our dataset even more we found the scores of all of the memes in dataset. We did this by **downloading** all 60000 meme webpages and screen scrapping to find the score that was presented on the page. This took about **4 Hours** so we won't recreate this here. We will however open a CSV file of these scores and add them to our dataset, just like we did with the language information. Run the next cell to do this and preview a few random scores.
+
+# In[16]:
+
+
+#Lets open the file and have a peak.
+meme_scores = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/meme_scores.csv",dtype={'Meme ID': object})
+meme_scores["Meme ID"] = meme_scores["Meme ID"].astype(str)
+meme_scores.sample(5)
+
+
+# Let's add this data to our original dataset by matching on the **Meme ID** column. Then let's look at a couple of random entries of our newly enriched completed dataset. For memes that we couldn't get a score for, we use a placeholder valued called _NaN_. (We missed some scores because the memes were deleted from the website) Run the next cell to create our final version of the dataset with all of enriched data and display a few random entries. Notice how we add a column called _Score_.
+# 
+
+# In[17]:
+
+
+#Original Dataset
+meme_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv", sep=",")
+meme_data["Meme ID"] = meme_data["Meme ID"].astype(str)
+
+#Language information added
+lang_data = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv")
+meme_data = meme_data.join(lang_data)
+
+#Meme Score Added
+meme_scores = pd.read_csv("https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/meme_scores.csv",dtype={'Meme ID': object})
+meme_scores["Meme ID"] = meme_scores["Meme ID"].astype(str)
+meme_data = pd.merge(meme_data,meme_scores,on="Meme ID", how = "outer")
+meme_data.dropna(thresh=8,inplace=True)
+
+#set our random item to be from our new dataframe
+rando = meme_data.sample(1)
+meme_data.sample(5)
+
+
+# ## The Final Analysis: Scores
+# 
+# 
+# Let's take a look at some aspects of our data now that we have enriched it with all the extra pieces:
+# 
+# - Language 
+# - Scores
+
+# In[18]:
+
+
+print("Average score of memes: ",meme_data["Score"].mean())
+
+
+# 
+
+# In[19]:
+
+
+print("Average score by languages, top 10 only: ")
+pd.DataFrame(meme_data.groupby("Language").mean()["Score"].sort_values(ascending=False)[0:10])
+
+
+# In[20]:
+
+
+print("Average score by base memes, top 25 only: ")
+#print(meme_data.groupby("Base Meme Name").mean()["Score"].sort_values(ascending=False)[0:25])
+pd.DataFrame(meme_data.groupby("Base Meme Name").mean()["Score"].sort_values(ascending=False)[0:25])
+
+
+# ## Highest Scoring Meme in the dataset!
+
+# In[21]:
+
+
+display(Image(url=meme_data[meme_data['Score'] == meme_data['Score'].max()]['Archived URL'].values[0], format='jpg'))
+meme_data[meme_data['Score'] == meme_data['Score'].max()]
+
+
+# 
+# # Congratulations
+# 
+# You've now had a tour of the Memegenerator dataset and found some interesting results.

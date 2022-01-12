@@ -1,125 +1,17 @@
 # What are web archives?
 
-Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
-in regular markdown files (`.md`), you'll write in the same flavor of markdown
-called **MyST Markdown**.
+Have you ever used the Way Back machine to reload a webpage that is no longer available? If you haven't, try searching for your favourite website below, and navigate back in time to a previous version of the web page:
 
-## What is MyST?
+<iframe src="https://archive.org/web/" style="border:0px #ffffff none; margin: auto;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe>
 
-MyST stands for "Markedly Structured Text". It
-is a slight variation on a flavor of markdown called "CommonMark" markdown,
-with small syntax extensions to allow you to write **roles** and **directives**
-in the Sphinx ecosystem.
+The WayBack machine captures websites using crawlers that package a webpage's content into a container called a .WARC file (Web Archive file). A WARC file is a lot like a zip file: it contains a lot of information about the web page, including content (text, images), markup and code (HTML, CSS, JS, etc), and additional metadata (when was the crawl completed, by whom). The WayBack Machine essentially opens up the WARC file and attempts to reload the webpage in the browser based on the data included in the WARC file. 
 
-## What are roles and directives?
+<iframe src="https://calmurgu.com/whats-the-hype/index.html" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe>
 
-Roles and directives are two of the most powerful tools in Jupyter Book. They
-are kind of like functions, but written in a markup language. They both
-serve a similar purpose, but **roles are written in one line**, whereas
-**directives span many lines**. They both accept different kinds of inputs,
-and what they do with those inputs depends on the specific role or directive
-that is being called.
+Reloading a WARC file is not a perfect reproduction: certain elements, such as video, are often excluded.
 
-### Using a directive
+## Web archive process
 
-At its simplest, you can insert a directive into your book's content like so:
+There are a few ways to create web archives. For example, you can archive websites by asking the WayBack machine to save a website for you. Alternatively, you could use a browser extension like <a href="http://matkelly.com/warcreate/">WarcCreate</a> or software like <a href="https://webrecorder.io/">WebRecorder</a> to create your own web archives through manual crawling. However, the most common approach is to use piece of software called a "crawler." A crawler received crawling instructions from an individual, and proceeds to crawl the web at specific rates. The main component necessary for a crawler to work is a "seed url": a URL for the crawler to start it's crawling journey. From there, the crawler may have instructions to jump from link to link, capturing web pages indiscriminately. Web archivists usually have a specific set of instructions that are within a crawling scope (for example, “these URLS are okay, stay away from these ones”). 
 
-````
-```{mydirectivename}
-My directive content
-```
-````
-
-This will only work if a directive with name `mydirectivename` already exists
-(which it doesn't). There are many pre-defined directives associated with
-Jupyter Book. For example, to insert a note box into your content, you can
-use the following directive:
-
-````
-```{note}
-Here is a note
-```
-````
-
-This results in:
-
-```{note}
-Here is a note
-```
-
-In your built book.
-
-For more information on writing directives, see the
-[MyST documentation](https://myst-parser.readthedocs.io/).
-
-
-### Using a role
-
-Roles are very similar to directives, but they are less-complex and written
-entirely on one line. You can insert a role into your book's content with
-this pattern:
-
-```
-Some content {rolename}`and here is my role's content!`
-```
-
-Again, roles will only work if `rolename` is a valid role's name. For example,
-the `doc` role can be used to refer to another page in your book. You can
-refer directly to another page by its relative path. For example, the
-role syntax `` {doc}`intro` `` will result in: {doc}`intro`.
-
-For more information on writing roles, see the
-[MyST documentation](https://myst-parser.readthedocs.io/).
-
-
-### Adding a citation
-
-You can also cite references that are stored in a `bibtex` file. For example,
-the following syntax: `` {cite}`holdgraf_evidence_2014` `` will render like
-this: {cite}`holdgraf_evidence_2014`.
-
-Moreover, you can insert a bibliography into your page with this syntax:
-The `{bibliography}` directive must be used for all the `{cite}` roles to
-render properly.
-For example, if the references for your book are stored in `references.bib`,
-then the bibliography is inserted with:
-
-````
-```{bibliography}
-```
-````
-
-Resulting in a rendered bibliography that looks like:
-
-```{bibliography}
-```
-
-
-### Executing code in your markdown files
-
-If you'd like to include computational content inside these markdown files,
-you can use MyST Markdown to define cells that will be executed when your
-book is built. Jupyter Book uses *jupytext* to do this.
-
-First, add Jupytext metadata to the file. For example, to add Jupytext metadata
-to this markdown page, run this command:
-
-```
-jupyter-book myst init markdown.md
-```
-
-Once a markdown file has Jupytext metadata in it, you can add the following
-directive to run the code at build time:
-
-````
-```{code-cell}
-print("Here is some code to execute")
-```
-````
-
-When your book is built, the contents of any `{code-cell}` blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.
-
-For more information about executing computational content with Jupyter Book,
-see [The MyST-NB documentation](https://myst-nb.readthedocs.io/).
+## Test your understanding

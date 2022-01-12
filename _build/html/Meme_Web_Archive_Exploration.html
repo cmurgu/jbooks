@@ -42,6 +42,8 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -267,7 +269,32 @@
      Language info
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary-of-language-information">
+     Summary of Language Information?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#meme-scores">
+     Meme Scores!
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-final-analysis-scores">
+     The Final Analysis: Scores
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#highest-scoring-meme-in-the-dataset">
+     Highest Scoring Meme in the dataset!
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#congratulations">
+   Congratulations
+  </a>
  </li>
 </ul>
 
@@ -333,7 +360,32 @@
      Language info
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary-of-language-information">
+     Summary of Language Information?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#meme-scores">
+     Meme Scores!
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-final-analysis-scores">
+     The Final Analysis: Scores
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#highest-scoring-meme-in-the-dataset">
+     Highest Scoring Meme in the dataset!
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#congratulations">
+   Congratulations
+  </a>
  </li>
 </ul>
 
@@ -355,22 +407,32 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install langdetect
+<span class="o">!</span>pip install pandas
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="c1">#from IPython.core.display import display,HTML</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">display</span><span class="p">,</span><span class="n">IFrame</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span><span class="p">,</span><span class="n">interact</span><span class="p">,</span><span class="n">interact_manual</span>
 <span class="kn">from</span> <span class="nn">langdetect</span> <span class="kn">import</span> <span class="n">detect</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="k">global</span> <span class="n">rando</span>
+
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries loaded, and ready to run!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Libraries loaded, and ready to run!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: langdetect in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (1.0.9)
 Requirement already satisfied: six in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from langdetect) (1.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (1.3.4)
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz&gt;=2017.3 in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from pandas) (2021.3)
+Requirement already satisfied: numpy&gt;=1.17.3 in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from pandas) (1.20.3)
+Requirement already satisfied: six&gt;=1.5 in /Users/calmurgu/opt/anaconda3/lib/python3.9/site-packages (from python-dateutil&gt;=2.7.3-&gt;pandas) (1.16.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries loaded, and ready to run!
@@ -386,6 +448,8 @@ Requirement already satisfied: six in /Users/calmurgu/opt/anaconda3/lib/python3.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
 <span class="n">meme_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -525,8 +589,8 @@ Requirement already satisfied: six in /Users/calmurgu/opt/anaconda3/lib/python3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/20093433.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/20093433
-View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instances/250x250/20093433.jpg
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/11364614.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/11364614
+View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/11364614.jpg
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -561,17 +625,17 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
   </thead>
   <tbody>
     <tr>
-      <th>29846</th>
-      <td>20093433</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>Angry Arnold</td>
-      <td>http://memegenerator.net/instance/20093433</td>
-      <td>636971352ca3df70f5d2d3b3d20128f9</td>
-      <td>43880</td>
-      <td>Hoy me le copio a la marcela en el examen</td>
-      <td>Angry Arnold</td>
-      <td>Hoy me le copio</td>
-      <td>a la marcela en el examen</td>
+      <th>11250</th>
+      <td>11364614</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Insanity Wolf</td>
+      <td>http://memegenerator.net/instance/11364614</td>
+      <td>e7eac377acef86b6cb1a56af5593a642</td>
+      <td>57375</td>
+      <td>Spit or swallow? drown!</td>
+      <td>Insanity Wolf</td>
+      <td>Spit or swallow?</td>
+      <td>drown!</td>
     </tr>
   </tbody>
 </table>
@@ -1126,71 +1190,36 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/https://cdn.meme.am/instanc
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Random Meme by Category</span>
-<span class="c1">#@markdown Type copy and pasting one of the **Base Meme Name** to see a random entry from that category of meme</span>
-<span class="n">meme_option</span> <span class="o">=</span> <span class="s2">&quot;Slowpoke&quot;</span> <span class="c1">#@param {type:&quot;string&quot;}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Random Entry Form</span>
+<span class="k">def</span> <span class="nf">show_random</span><span class="p">(</span><span class="n">choice</span><span class="p">):</span>
+  <span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">)]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Memegenerator: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Meme Page URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Archive: </span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">rando</span><span class="p">)</span>
 
-<span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">meme_option</span><span class="p">)]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Memegenerator: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Meme Page URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;View on Archive: </span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">rando</span>
+
+<span class="n">title_textbox</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Me Gusta&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter a meme category from the list above to see a random entry in that category&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Click &#39;Show&#39; to display</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">show_random_control</span> <span class="o">=</span> <span class="n">interact_manual</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">manual_name</span><span class="o">=</span><span class="s2">&quot;Show&quot;</span><span class="p">)</span>
+<span class="n">show_random_control</span><span class="p">(</span><span class="n">show_random</span><span class="p">,</span><span class="n">choice</span><span class="o">=</span><span class="n">title_textbox</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/25498709.jpg"/></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View on Memegenerator: 	 http://memegenerator.net/instance/25498709
-View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/25498709.jpg
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter a meme category from the list above to see a random entry in that category
+Click &#39;Show&#39; to display
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Meme ID</th>
-      <th>Archived URL</th>
-      <th>Base Meme Name</th>
-      <th>Meme Page URL</th>
-      <th>MD5 Hash</th>
-      <th>File Size (In Bytes)</th>
-      <th>Alternate Text</th>
-      <th>Display Name</th>
-      <th>Upper Text</th>
-      <th>Lower Text</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>41738</th>
-      <td>25498709</td>
-      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
-      <td>Slowpoke</td>
-      <td>http://memegenerator.net/instance/25498709</td>
-      <td>03f4bd293ee277eb2ef432212115ab6e</td>
-      <td>40542</td>
-      <td>да ты чтоооо</td>
-      <td>Slowpoke</td>
-      <td>да ты чтоооо</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "4e75982e747c4fb0abd623c3dd6bfb0b"}
+</script></div>
 </div>
+<p>Let’s know look at how the meme is displayed as a table</p>
 <p>What’s the <strong>average</strong> number of memes in each type?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1205,7 +1234,22 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
 </div>
 </div>
 </div>
-<p>Let’s draw a <strong>histogram</strong> of this distribution</p>
+<p>The average might be a little misleading. Let’s also check what the median number is for each base meme. The code chunk below is incomplete. Can you resolve the error?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meme_type_median</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">])[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median number of entires per base meme is: &quot;</span><span class="p">,</span><span class="n">meme_type_median</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The median number of entires per base meme is:  13.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the difference between the mean and the median is significant. This is because there’s a skewed distribution in our dataset. Do you have any guesses as to why this might be the case? Share your thoughts in the chat!</p>
+<p>Let’s visualize this skewed distribution by drawing a <strong>histogram</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="mi">150</span>
@@ -1220,19 +1264,13 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Meme_Web_Archive_Exploration_21_0.png" src="_images/Meme_Web_Archive_Exploration_21_0.png" />
+<img alt="_images/Meme_Web_Archive_Exploration_25_0.png" src="_images/Meme_Web_Archive_Exploration_25_0.png" />
 </div>
 </div>
 <p><strong>Q3</strong> Can you describe this graph? What is the biggest value that it is showing?</p>
-<p>data things to do</p>
-<ul class="simple">
-<li><p>alt text somehow?</p></li>
-<li><p>language detection?</p></li>
-<li><p>pull in scores via API?</p></li>
-</ul>
 <div class="section" id="language-info">
 <h2>Language info<a class="headerlink" href="#language-info" title="Permalink to this headline">¶</a></h2>
-<p>As we’ve seen in our examples there are many different languages represented in our dataset. Let’s see if we can <strong>enrich</strong> our dataset by automatically detecting what language it is and adding that as a new column. We’ll us the <a class="reference external" href="https://pypi.org/project/langdetect/">langdetect</a> library to do this.</p>
+<p>As we’ve seen in our examples there are many different languages represented in our dataset. Let’s see if we can <strong>enrich</strong> our dataset by automatically detecting what language it is and adding that as a new column. We’ll use the <a class="reference external" href="https://pypi.org/project/langdetect/">langdetect</a> library to do this. We can use the text in the <em>Alternate Text</em> column.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s look at our random item again</span>
@@ -1273,17 +1311,17 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
   </thead>
   <tbody>
     <tr>
-      <th>41738</th>
-      <td>25498709</td>
+      <th>11250</th>
+      <td>11364614</td>
       <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
-      <td>Slowpoke</td>
-      <td>http://memegenerator.net/instance/25498709</td>
-      <td>03f4bd293ee277eb2ef432212115ab6e</td>
-      <td>40542</td>
-      <td>да ты чтоооо</td>
-      <td>Slowpoke</td>
-      <td>да ты чтоооо</td>
-      <td>-</td>
+      <td>Insanity Wolf</td>
+      <td>http://memegenerator.net/instance/11364614</td>
+      <td>e7eac377acef86b6cb1a56af5593a642</td>
+      <td>57375</td>
+      <td>Spit or swallow? drown!</td>
+      <td>Insanity Wolf</td>
+      <td>Spit or swallow?</td>
+      <td>drown!</td>
     </tr>
   </tbody>
 </table>
@@ -1293,23 +1331,28 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s the language of the random entry from earlier</span>
 <span class="c1"># We&#39;ll get a two letter languge code that represents one of the languages in the list of ISO 639-1 codes (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). </span>
-<span class="n">detect</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rando</span><span class="p">[</span><span class="s2">&quot;Alternate Text&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">detect</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rando</span><span class="p">[</span><span class="s2">&quot;Alternate Text&quot;</span><span class="p">])))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ro&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>en
 </pre></div>
 </div>
 </div>
 </div>
-<p>It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values.</p>
-<p>(It took 8 minutes for the code to run)</p>
+<p>It would take to long to calculate all these values now for all of the entries in the dataset. So the next cell will just add a new column to our dataset of pre-calculated values. (It took 8 minutes for language detection code to run on the original dataset)</p>
+<p>Have a look at the new column <em>Language</em> that was added.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#open CSV to dataframe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#reload original dataset</span>
+<span class="n">meme_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1">#open CSV of language info and create a dataframe</span>
 <span class="n">lang_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv&quot;</span><span class="p">)</span>
-<span class="c1">#append to meme_data dataframe</span>
+
+<span class="c1">#language data from to meme_data dataframe</span>
 <span class="n">meme_data</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lang_data</span><span class="p">)</span>
 <span class="n">meme_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
@@ -1349,79 +1392,83 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
   </thead>
   <tbody>
     <tr>
-      <th>48567</th>
-      <td>29519242</td>
+      <th>4776</th>
+      <td>10486793</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Butthurt Dweller</td>
+      <td>http://memegenerator.net/instance/10486793</td>
+      <td>51d6b61e307449eb3eead774f9f21fcc</td>
+      <td>48896</td>
+      <td>дашонка лаффки тя</td>
+      <td>Butthurt Dweller</td>
+      <td>дашонка</td>
+      <td>лаффки тя</td>
+      <td>bg</td>
+    </tr>
+    <tr>
+      <th>24251</th>
+      <td>16535898</td>
       <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
-      <td>Uncle Sam Says</td>
-      <td>http://memegenerator.net/instance/29519242</td>
-      <td>c469fd07fe0519115a1eac4951e2238f</td>
-      <td>60586</td>
-      <td>Почему не штабишь Антон палыч?</td>
-      <td>Uncle Sam Says</td>
-      <td>Почему не штабишь</td>
-      <td>Антон палыч?</td>
-      <td>ru</td>
+      <td>Fat Girl</td>
+      <td>http://memegenerator.net/instance/16535898</td>
+      <td>94419cfb7b536bedc12f132e136a56ba</td>
+      <td>40840</td>
+      <td>Im sexy  and I Know It</td>
+      <td>Fat Girl</td>
+      <td>Im sexy</td>
+      <td>and I Know It</td>
+      <td>en</td>
     </tr>
     <tr>
-      <th>26674</th>
-      <td>18035363</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>yaowonkaxd</td>
-      <td>http://memegenerator.net/instance/18035363</td>
-      <td>3baf076728e9b4406af083d94c7d1b33</td>
-      <td>64225</td>
-      <td>que se siente escuchar la cancion hangover y c...</td>
-      <td>yaowonkaxd</td>
-      <td>que se siente escuchar la cancion hangover</td>
-      <td>y cambiarle hangover por range rover</td>
-      <td>es</td>
-    </tr>
-    <tr>
-      <th>39863</th>
-      <td>24568200</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>KLINIK TONGFANG</td>
-      <td>http://memegenerator.net/instance/24568200</td>
-      <td>0cb49b8cee9452a9a7857763ec8ac348</td>
-      <td>61590</td>
-      <td>DULU SAYA SELALU TELAH DALAM DEADLINE BIKIN KO...</td>
-      <td>KLINIK TONGFANG</td>
-      <td>DULU SAYA SELALU TELAH DALAM DEADLINE BIKIN KOMIK</td>
-      <td>TAPI SETELAH SAYA KE KLINIK TONG FANG, SAYA KE...</td>
-      <td>de</td>
-    </tr>
-    <tr>
-      <th>22946</th>
-      <td>15852175</td>
-      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
-      <td>Typical Gorillaz</td>
-      <td>http://memegenerator.net/instance/15852175</td>
-      <td>3581746303dceb09923f503bface4b18</td>
-      <td>56286</td>
-      <td>Fan   А Мердок поздравил 2D с 8 марта:3</td>
-      <td>Typical Gorillaz-Fan</td>
-      <td>А Мердок поздравил 2D</td>
-      <td>с 8 марта:3</td>
-      <td>ru</td>
-    </tr>
-    <tr>
-      <th>32711</th>
-      <td>21621586</td>
+      <th>34557</th>
+      <td>22480763</td>
       <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
-      <td>Stoner Dog</td>
-      <td>http://memegenerator.net/instance/21621586</td>
-      <td>922e05e6f5e2d7a399434f1ab1e724e8</td>
-      <td>67677</td>
-      <td>jujuju esa que me eche esta va vencida pero ma...</td>
-      <td>Stoner Dog</td>
-      <td>jujuju esa que me eche esta va vencida pero ma...</td>
-      <td>veo mi dueño  asiendo caca</td>
-      <td>es</td>
+      <td>Butthurt Dweller</td>
+      <td>http://memegenerator.net/instance/22480763</td>
+      <td>7eb1cc53f655d0cfb7e10533fae7a794</td>
+      <td>51573</td>
+      <td>I bought skyrim a few months back. nobody's se...</td>
+      <td>Butthurt Dweller</td>
+      <td>I bought skyrim a few months back.</td>
+      <td>nobody's seen me since</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <th>21635</th>
+      <td>15244846</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Bad Factman</td>
+      <td>http://memegenerator.net/instance/15244846</td>
+      <td>2ace8e5087778b1f627cb15894cebea0</td>
+      <td>41164</td>
+      <td>What if oxygen is poisonous, And it takes 80 y...</td>
+      <td>Bad Factman</td>
+      <td>What if oxygen is poisonous,</td>
+      <td>And it takes 80 years to kill us?</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <th>49759</th>
+      <td>30258780</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Atypical fan hetalia</td>
+      <td>http://memegenerator.net/instance/30258780</td>
+      <td>46422b8b62a4c7f07304c6426fb15529</td>
+      <td>31393</td>
+      <td>Не люблю японию</td>
+      <td>Atypical fan hetalia</td>
+      <td>Не люблю</td>
+      <td>японию</td>
+      <td>ru</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+</div>
+<div class="section" id="summary-of-language-information">
+<h2>Summary of Language Information?<a class="headerlink" href="#summary-of-language-information" title="Permalink to this headline">¶</a></h2>
+<p>Run the next cell to generate a pie graph of the language count in the meme.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">language_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -1445,11 +1492,552 @@ View on Archive: 			 http://webarchive.loc.gov/all/0/http://cdn.meme.am/instance
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Meme_Web_Archive_Exploration_30_0.png" src="_images/Meme_Web_Archive_Exploration_30_0.png" />
+<img alt="_images/Meme_Web_Archive_Exploration_33_0.png" src="_images/Meme_Web_Archive_Exploration_33_0.png" />
+</div>
+</div>
+<p>That’s a lot of languages!</p>
+</div>
+<div class="section" id="meme-scores">
+<h2>Meme Scores!<a class="headerlink" href="#meme-scores" title="Permalink to this headline">¶</a></h2>
+<p>Memegenerator has voting capability. By clicking the up or down arrow users can increase / descrease this score. Let’s see this for our random meme. Run the next cell to generate the preview</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rando</span><span class="p">[</span><span class="s1">&#39;Meme Page URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">preview_url</span> <span class="o">=</span> <span class="n">preview_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;http:&quot;</span><span class="p">,</span><span class="s2">&quot;https:&quot;</span><span class="p">)</span>
+
+<span class="n">IFrame</span><span class="p">(</span><span class="n">preview_url</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="1000"
+    height="700"
+    src="https://memegenerator.net/instance/11364614"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To enrich our dataset even more we found the scores of all of the memes in dataset. We did this by <strong>downloading</strong> all 60000 meme webpages and screen scrapping to find the score that was presented on the page. This took about <strong>4 Hours</strong> so we won’t recreate this here. We will however open a CSV file of these scores and add them to our dataset, just like we did with the language information. Run the next cell to do this and preview a few random scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Lets open the file and have a peak.</span>
+<span class="n">meme_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/meme_scores.csv&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Meme ID&#39;</span><span class="p">:</span> <span class="nb">object</span><span class="p">})</span>
+<span class="n">meme_scores</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meme_scores</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">meme_scores</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14982</th>
+      <td>33665672</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>47171</th>
+      <td>32456459</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>47606</th>
+      <td>10676617</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>30160528</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>47439</th>
+      <td>10704980</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s add this data to our original dataset by matching on the <strong>Meme ID</strong> column. Then let’s look at a couple of random entries of our newly enriched completed dataset. For memes that we couldn’t get a score for, we use a placeholder valued called <em>NaN</em>. (We missed some scores because the memes were deleted from the website) Run the next cell to create our final version of the dataset with all of enriched data and display a few random entries. Notice how we add a column called <em>Score</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Original Dataset</span>
+<span class="n">meme_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/memegenerator.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1">#Language information added</span>
+<span class="n">lang_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/language_data.csv&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lang_data</span><span class="p">)</span>
+
+<span class="c1">#Meme Score Added</span>
+<span class="n">meme_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/BrockDSL/Analyzing_Web_Archives/main/meme_scores.csv&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Meme ID&#39;</span><span class="p">:</span> <span class="nb">object</span><span class="p">})</span>
+<span class="n">meme_scores</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meme_scores</span><span class="p">[</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">meme_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">meme_data</span><span class="p">,</span><span class="n">meme_scores</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s2">&quot;Meme ID&quot;</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#set our random item to be from our new dataframe</span>
+<span class="n">rando</span> <span class="o">=</span> <span class="n">meme_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">meme_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+      <th>Language</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>23129</th>
+      <td>15949159</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Angry School Boy</td>
+      <td>http://memegenerator.net/instance/15949159</td>
+      <td>ed43328e8c788e7645874242c323f3b6</td>
+      <td>49386.0</td>
+      <td>Mama que ella le ponga me gusta en mi facebook...</td>
+      <td>Angry School Boy</td>
+      <td>Mama</td>
+      <td>que ella le ponga me gusta en mi facebook no s...</td>
+      <td>es</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>20252</th>
+      <td>14494176</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>-</td>
+      <td>-</td>
+      <td>988bbbc6ab71911efa523e36de91a642</td>
+      <td>51771.0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>54151</th>
+      <td>32822495</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Overly Attached Girlfriend 2</td>
+      <td>http://memegenerator.net/instance/32822495</td>
+      <td>08856add8d56e2bb3329b6d6afd8e9be</td>
+      <td>63866.0</td>
+      <td>mis novios son los que  NO SON FANS DE KYUBOLE...</td>
+      <td>Overly Attached Girlfriend 2</td>
+      <td>mis novios son los que</td>
+      <td>NO SON FANS DE KYUBOLE KE TRANZA</td>
+      <td>es</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>33789</th>
+      <td>22130586</td>
+      <td>http://webarchive.loc.gov/all/0/https://cdn.me...</td>
+      <td>Success African Kid</td>
+      <td>http://memegenerator.net/instance/22130586</td>
+      <td>00ca9f607d6a88378b7b69fca14245bc</td>
+      <td>60572.0</td>
+      <td>uuy mamitaa si asi lo mueve yo se lo mevo asi</td>
+      <td>Success African Kid</td>
+      <td>uuy mamitaa</td>
+      <td>si asi lo mueve yo se lo mevo asi</td>
+      <td>fi</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>42448</th>
+      <td>26010082</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Achievement Unlocked</td>
+      <td>http://memegenerator.net/instance/26010082</td>
+      <td>b9c9e7cc0a5f8defcffda43961727f36</td>
+      <td>6251.0</td>
+      <td>Случайно Убить попадоса</td>
+      <td>Achievement Unlocked</td>
+      <td>Случайно</td>
+      <td>Убить попадоса</td>
+      <td>uk</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="the-final-analysis-scores">
+<h2>The Final Analysis: Scores<a class="headerlink" href="#the-final-analysis-scores" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a look at some aspects of our data now that we have enriched it with all the extra pieces:</p>
+<ul class="simple">
+<li><p>Language</p></li>
+<li><p>Scores</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average score of memes: &quot;</span><span class="p">,</span><span class="n">meme_data</span><span class="p">[</span><span class="s2">&quot;Score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average score of memes:  10.576686894303052
+</pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average score by languages, top 10 only: &quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Language&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;Score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average score by languages, top 10 only: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Score</th>
+    </tr>
+    <tr>
+      <th>Language</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ar</th>
+      <td>44.666667</td>
+    </tr>
+    <tr>
+      <th>en</th>
+      <td>29.960710</td>
+    </tr>
+    <tr>
+      <th>da</th>
+      <td>19.219780</td>
+    </tr>
+    <tr>
+      <th>no</th>
+      <td>18.206107</td>
+    </tr>
+    <tr>
+      <th>af</th>
+      <td>16.943114</td>
+    </tr>
+    <tr>
+      <th>fi</th>
+      <td>12.451128</td>
+    </tr>
+    <tr>
+      <th>sv</th>
+      <td>9.605769</td>
+    </tr>
+    <tr>
+      <th>de</th>
+      <td>7.551300</td>
+    </tr>
+    <tr>
+      <th>vi</th>
+      <td>6.245478</td>
+    </tr>
+    <tr>
+      <th>cy</th>
+      <td>6.005222</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average score by base memes, top 25 only: &quot;</span><span class="p">)</span>
+<span class="c1">#print(meme_data.groupby(&quot;Base Meme Name&quot;).mean()[&quot;Score&quot;].sort_values(ascending=False)[0:25])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">meme_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Base Meme Name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;Score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">25</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average score by base memes, top 25 only: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Score</th>
+    </tr>
+    <tr>
+      <th>Base Meme Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Scumbag Analytic Philosopher</th>
+      <td>159.400000</td>
+    </tr>
+    <tr>
+      <th>Douchebag Roommate</th>
+      <td>134.437500</td>
+    </tr>
+    <tr>
+      <th>Fallout 3</th>
+      <td>117.142857</td>
+    </tr>
+    <tr>
+      <th>Jonnen Neuvo</th>
+      <td>111.000000</td>
+    </tr>
+    <tr>
+      <th>PTSD Karate Kyle</th>
+      <td>88.272727</td>
+    </tr>
+    <tr>
+      <th>Stereotypical Corps Guy</th>
+      <td>85.714286</td>
+    </tr>
+    <tr>
+      <th>Idiot Nerd Girl</th>
+      <td>85.066667</td>
+    </tr>
+    <tr>
+      <th>Condescending Wonka</th>
+      <td>84.750000</td>
+    </tr>
+    <tr>
+      <th>Privilege Denying Feminist</th>
+      <td>82.882353</td>
+    </tr>
+    <tr>
+      <th>Bill O'Reilly Proves God</th>
+      <td>74.615385</td>
+    </tr>
+    <tr>
+      <th>Scumbag Continental Philosopher</th>
+      <td>74.000000</td>
+    </tr>
+    <tr>
+      <th>Conspiracy Keanu</th>
+      <td>73.188854</td>
+    </tr>
+    <tr>
+      <th>High Expectations Asian Father</th>
+      <td>72.870748</td>
+    </tr>
+    <tr>
+      <th>College Liberal</th>
+      <td>69.916667</td>
+    </tr>
+    <tr>
+      <th>Jay Wilson Diablo 3</th>
+      <td>65.500000</td>
+    </tr>
+    <tr>
+      <th>old lady</th>
+      <td>64.333333</td>
+    </tr>
+    <tr>
+      <th>First World Problems</th>
+      <td>63.719512</td>
+    </tr>
+    <tr>
+      <th>Sudden Clarity Clarence</th>
+      <td>60.333333</td>
+    </tr>
+    <tr>
+      <th>One Does Not Simply</th>
+      <td>56.438017</td>
+    </tr>
+    <tr>
+      <th>Trologirl</th>
+      <td>51.871795</td>
+    </tr>
+    <tr>
+      <th>Advice Peeta</th>
+      <td>51.000000</td>
+    </tr>
+    <tr>
+      <th>Philosoraptor</th>
+      <td>50.242563</td>
+    </tr>
+    <tr>
+      <th>Successful Black Man</th>
+      <td>50.233766</td>
+    </tr>
+    <tr>
+      <th>Professor Oak</th>
+      <td>49.942308</td>
+    </tr>
+    <tr>
+      <th>Obese American</th>
+      <td>49.900000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="highest-scoring-meme-in-the-dataset">
+<h2>Highest Scoring Meme in the dataset!<a class="headerlink" href="#highest-scoring-meme-in-the-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">meme_data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()][</span><span class="s1">&#39;Archived URL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jpg&#39;</span><span class="p">))</span>
+<span class="n">meme_data</span><span class="p">[</span><span class="n">meme_data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">meme_data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="http://webarchive.loc.gov/all/0/http://cdn.meme.am/instances/250x250/21335866.jpg"/></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Meme ID</th>
+      <th>Archived URL</th>
+      <th>Base Meme Name</th>
+      <th>Meme Page URL</th>
+      <th>MD5 Hash</th>
+      <th>File Size (In Bytes)</th>
+      <th>Alternate Text</th>
+      <th>Display Name</th>
+      <th>Upper Text</th>
+      <th>Lower Text</th>
+      <th>Language</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>32193</th>
+      <td>21335866</td>
+      <td>http://webarchive.loc.gov/all/0/http://cdn.mem...</td>
+      <td>Trollface</td>
+      <td>http://memegenerator.net/instance/21335866</td>
+      <td>4979f0c5be91788f290afa4a4791be4c</td>
+      <td>45715.0</td>
+      <td>guys press ctrl+like and see what happens</td>
+      <td>Trollface</td>
+      <td>guys</td>
+      <td>press ctrl+like and see what happens</td>
+      <td>en</td>
+      <td>2970.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="congratulations">
+<h1>Congratulations<a class="headerlink" href="#congratulations" title="Permalink to this headline">¶</a></h1>
+<p>You’ve now had a tour of the Memegenerator dataset and found some interesting results.</p>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"37bdda0518434396846f73607537fba1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9130a0881e494cafad8b1a7179de4f29": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "78929a73fd0549d2be9f24748a7f1020": {"model_name": "TextModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "TextModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "TextView", "continuous_update": true, "description": "Category", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_37bdda0518434396846f73607537fba1", "placeholder": "\u200b", "style": "IPY_MODEL_9130a0881e494cafad8b1a7179de4f29", "value": "Me Gusta"}}, "389dd8fd00e04313b8cb9ffc6aafdd8e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4e75982e747c4fb0abd623c3dd6bfb0b": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_78929a73fd0549d2be9f24748a7f1020", "IPY_MODEL_5d44312e3d464339845984a1b8f345b0", "IPY_MODEL_fe35a026b1f545e896592795f78992fa"], "layout": "IPY_MODEL_389dd8fd00e04313b8cb9ffc6aafdd8e"}}, "c6c98ca43739424a98b747cfc21d5834": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2ea61f4b1d11468d99ff5d711a235a01": {"model_name": "ButtonStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "5d44312e3d464339845984a1b8f345b0": {"model_name": "ButtonModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "Show", "disabled": false, "icon": "", "layout": "IPY_MODEL_c6c98ca43739424a98b747cfc21d5834", "style": "IPY_MODEL_2ea61f4b1d11468d99ff5d711a235a01", "tooltip": ""}}, "4df63431e80e41e08c84dc240ed3daa6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "fe35a026b1f545e896592795f78992fa": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_4df63431e80e41e08c84dc240ed3daa6", "msg_id": "", "outputs": []}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
