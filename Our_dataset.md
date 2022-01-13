@@ -1,125 +1,203 @@
 # Our Dataset
 
-Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
-in regular markdown files (`.md`), you'll write in the same flavor of markdown
-called **MyST Markdown**.
+For this workshop, we'll be dealing with archived memes. The memegenerator.net dataset was generated from content harvested from memegenerator.net and includes 57,652 unique meme instances derived from base memes (meme images without text, waiting to be fashioned into meme instances). We thank the Library of Congress of making this dataset available for scholarly and educational use. The data set includes some minimal metadata for these Memes, as well as URLs to the memes themselves (but not the actual meme).
 
-## What is MyST?
+## Wait, I thought we were working with WARCs not CSVs?
 
-MyST stands for "Markedly Structured Text". It
-is a slight variation on a flavor of markdown called "CommonMark" markdown,
-with small syntax extensions to allow you to write **roles** and **directives**
-in the Sphinx ecosystem.
+WARC files are fabulous containers, but the data that they hold are not easily analyzable when in that format. Imagine if you had data in a .zip file — several spreadsheets, for example. You would not be able to analyze it until after you unzipped the file. The same is true with the data stored in a WARC file. We do not work directly with WARC files; we must first process them into something called web archive derivatives. Here's what a WARC file looks like when you open it up in a text editor.
 
-## What are roles and directives?
+``` 
+WARC/1.0
+WARC-Type: warcinfo
+WARC-Record-ID: <urn:uuid:fbd6cf0a-6160-4550-b343-12188dc05234>
+WARC-Date: 2014-01-03T03:03:22Z
+Content-Length: 196
+Content-Type: application/warc-fields
+WARC-Filename: live-20140103030321-wwwb-app5.us.archive.org.warc.gz
 
-Roles and directives are two of the most powerful tools in Jupyter Book. They
-are kind of like functions, but written in a markup language. They both
-serve a similar purpose, but **roles are written in one line**, whereas
-**directives span many lines**. They both accept different kinds of inputs,
-and what they do with those inputs depends on the specific role or directive
-that is being called.
+software: LiveWeb Warc Writer 1.0
+host: wwwb-app5.us.archive.org
+isPartOf: liveweb
+format: WARC file version 1.0
+conformsTo: http://bibnum.bnf.fr/WARC/WARC_ISO_28500_version1_latestdraft.pdf
 
-### Using a directive
 
-At its simplest, you can insert a directive into your book's content like so:
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:6d058047-ede2-4a13-be79-90c17c631dd4>
+WARC-Date: 2014-01-03T03:03:21Z
+Content-Length: 1610
+Content-Type: application/http; msgtype=response
+WARC-Payload-Digest: sha1:B2LTWWPUOYAH7UIPQ7ZUPQ4VMBSVC36A
+WARC-Target-URI: http://example.com?example=1
+WARC-Warcinfo-ID: <urn:uuid:fbd6cf0a-6160-4550-b343-12188dc05234>
 
-````
-```{mydirectivename}
-My directive content
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=604800
+Content-Type: text/html
+Date: Fri, 03 Jan 2014 03:03:21 GMT
+Etag: "359670651"
+Expires: Fri, 10 Jan 2014 03:03:21 GMT
+Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+Server: ECS (sjc/4FCE)
+X-Cache: HIT
+x-ec-custom-error: 1
+Content-Length: 1270
+Connection: close
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 50px;
+        background-color: #fff;
+        border-radius: 1em;
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        body {
+            background-color: #fff;
+        }
+        div {
+            width: auto;
+            margin: 0 auto;
+            border-radius: 0;
+            padding: 1em;
+        }
+    }
+    </style>    
+</head>
+
+<body>
+<div>
+    <h1>Example Domain</h1>
+    <p>This domain is established to be used for illustrative examples in documents. You may use this
+    domain in examples without prior coordination or asking for permission.</p>
+    <p><a href="http://www.iana.org/domains/example">More information...</a></p>
+</div>
+</body>
+</html>
+
+
+WARC/1.0
+WARC-Type: request
+WARC-Record-ID: <urn:uuid:9a3ffea5-9556-4790-a6bf-c15231fd6b97>
+WARC-Date: 2014-01-03T03:03:21Z
+Content-Length: 323
+Content-Type: application/http; msgtype=request
+WARC-Concurrent-To: <urn:uuid:6d058047-ede2-4a13-be79-90c17c631dd4>
+WARC-Target-URI: http://example.com?example=1
+WARC-Warcinfo-ID: <urn:uuid:fbd6cf0a-6160-4550-b343-12188dc05234>
+
+GET /?example=1 HTTP/1.1
+Connection: close
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36 (via Wayback Save Page)
+Host: example.com
+
+
+WARC/1.0
+WARC-Type: revisit
+WARC-Record-ID: <urn:uuid:3619f5b0-d967-44be-8f24-762098d427c4>
+WARC-Date: 2014-01-03T03:03:41Z
+Content-Length: 340
+Content-Type: application/http; msgtype=response
+WARC-Payload-Digest: sha1:B2LTWWPUOYAH7UIPQ7ZUPQ4VMBSVC36A
+WARC-Target-URI: http://example.com?example=1
+WARC-Warcinfo-ID: <urn:uuid:fbd6cf0a-6160-4550-b343-12188dc05234>
+WARC-Profile: http://netpreserve.org/warc/0.18/revisit/identical-payload-digest
+WARC-Refers-To-Target-URI: http://example.com?example=1
+WARC-Refers-To-Date: 2014-01-03T03:03:21Z
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=604800
+Content-Type: text/html
+Date: Fri, 03 Jan 2014 03:03:41 GMT
+Etag: "359670651"
+Expires: Fri, 10 Jan 2014 03:03:41 GMT
+Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+Server: ECS (sjc/4FCE)
+X-Cache: HIT
+x-ec-custom-error: 1
+Content-Length: 1270
+Connection: close
+
+
+
+WARC/1.0
+WARC-Type: request
+WARC-Record-ID: <urn:uuid:c59f3330-b241-4fca-8513-d687cd85bcfb>
+WARC-Date: 2014-01-03T03:03:41Z
+Content-Length: 320
+Content-Type: application/http; msgtype=request
+WARC-Concurrent-To: <urn:uuid:3619f5b0-d967-44be-8f24-762098d427c4>
+WARC-Target-URI: http://example.com?example=1
+WARC-Warcinfo-ID: <urn:uuid:fbd6cf0a-6160-4550-b343-12188dc05234>
+
+GET /?example=1 HTTP/1.1
+Connection: close
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36 (via Wayback Save Page)
+Host: example.com
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:1d673b2a-c593-402e-8973-3950d0bc6163>
+WARC-Date: 2014-01-28T05:15:39Z
+Content-Length: 471
+Content-Type: application/http; msgtype=response
+WARC-Payload-Digest: sha1:JZ622UA23G5ZU6Y3XAKH4LINONUEICEG
+WARC-Target-URI: http://www.iana.org/domains/example
+WARC-Warcinfo-ID: <urn:uuid:e9f7f74b-0280-47fd-99bc-f00f1a570a46>
+
+HTTP/1.1 302 Found
+Server: Apache
+Location: /domains/reserved
+Content-Type: text/html; charset=iso-8859-1
+Content-Length: 201
+Accept-Ranges: bytes
+Date: Tue, 28 Jan 2014 05:15:39 GMT
+X-Varnish: 774901408 774900872
+Age: 80
+Via: 1.1 varnish
+Connection: close
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="/domains/reserved">here</a>.</p>
+</body></html>
 ```
-````
+If you think back to the previous section, you can see different headers, as well as a content block (some HTML). Using special functions, we can create exports of specific data within these WARCs that are more amenable for computational analysis, using Python or R. This workshop does not go into detail on the derivatives process (we provide you with the derivative in CSV format), but the graphic below demonstrates how derivatives are created. 
 
-This will only work if a directive with name `mydirectivename` already exists
-(which it doesn't). There are many pre-defined directives associated with
-Jupyter Book. For example, to insert a note box into your content, you can
-use the following directive:
-
-````
-```{note}
-Here is a note
-```
-````
-
-This results in:
-
-```{note}
-Here is a note
-```
-
-In your built book.
-
-For more information on writing directives, see the
-[MyST documentation](https://myst-parser.readthedocs.io/).
+<iframe src="https://calmurgu.com/whats-the-hype/process/index.html" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="600px" allowfullscreen></iframe>
 
 
-### Using a role
-
-Roles are very similar to directives, but they are less-complex and written
-entirely on one line. You can insert a role into your book's content with
-this pattern:
-
-```
-Some content {rolename}`and here is my role's content!`
-```
-
-Again, roles will only work if `rolename` is a valid role's name. For example,
-the `doc` role can be used to refer to another page in your book. You can
-refer directly to another page by its relative path. For example, the
-role syntax `` {doc}`intro` `` will result in: {doc}`intro`.
-
-For more information on writing roles, see the
-[MyST documentation](https://myst-parser.readthedocs.io/).
+## Types of derivatives
 
 
-### Adding a citation
-
-You can also cite references that are stored in a `bibtex` file. For example,
-the following syntax: `` {cite}`holdgraf_evidence_2014` `` will render like
-this: {cite}`holdgraf_evidence_2014`.
-
-Moreover, you can insert a bibliography into your page with this syntax:
-The `{bibliography}` directive must be used for all the `{cite}` roles to
-render properly.
-For example, if the references for your book are stored in `references.bib`,
-then the bibliography is inserted with:
-
-````
-```{bibliography}
-```
-````
-
-Resulting in a rendered bibliography that looks like:
-
-```{bibliography}
-```
-
-
-### Executing code in your markdown files
-
-If you'd like to include computational content inside these markdown files,
-you can use MyST Markdown to define cells that will be executed when your
-book is built. Jupyter Book uses *jupytext* to do this.
-
-First, add Jupytext metadata to the file. For example, to add Jupytext metadata
-to this markdown page, run this command:
-
-```
-jupyter-book myst init markdown.md
-```
-
-Once a markdown file has Jupytext metadata in it, you can add the following
-directive to run the code at build time:
-
-````
-```{code-cell}
-print("Here is some code to execute")
-```
-````
-
-When your book is built, the contents of any `{code-cell}` blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.
-
-For more information about executing computational content with Jupyter Book,
-see [The MyST-NB documentation](https://myst-nb.readthedocs.io/).
